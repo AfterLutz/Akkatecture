@@ -265,11 +265,12 @@ Target.create "Test" (fun _ ->
             MSBuildParams = 
                 { defaults.MSBuildParams with
                     Properties = [
-                        "Logger", "GithubActions"
                         "CollectCoverage", "true";
                         "CoverletOutputFormat", "opencover"
                         "CoverletOutput", coverletOutput;
-                        "Exclude", @"[xunit*]*,[Akkatecture.TestHelpers]*,[Akkatecture.Tests*]*,[*TestRunner*]*"] }
+                        "Exclude", @"[xunit*]*,[Akkatecture.TestHelpers]*,[Akkatecture.Tests*]*,[*TestRunner*]*"]
+                    }
+            Logger = Some("GithubActions")
             Configuration = configuration
             NoBuild = true}
 
