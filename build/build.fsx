@@ -1,14 +1,14 @@
 #r "paket: 
-nuget Fake.Api.GitHub
-nuget Fake.DotNet.Cli
-nuget Fake.DotNet.NuGet
-nuget Fake.IO.FileSystem
-nuget Fake.IO.Zip
-nuget Fake.Core.Target
-nuget Fake.Core.Process
-nuget Fake.BuildServer.TeamFoundation
-nuget Fake.Testing.SonarQube
-nuget FSharp.Json"
+nuget Fake.Api.GitHub 5.1.0
+nuget Fake.DotNet.Cli 5.1.0
+nuget Fake.DotNet.NuGet 5.1.0
+nuget Fake.IO.FileSystem 5.1.0
+nuget Fake.IO.Zip 5.1.0
+nuget Fake.Core.Target 5.1.0
+nuget Fake.Core.Process 5.1.0
+nuget Fake.BuildServer.TeamFoundation 5.1.0
+nuget Fake.Testing.SonarQube 5.1.0
+nuget FSharp.Json 5.1.0"
 
 #load ".fake/build.fsx/intellisense.fsx"
 
