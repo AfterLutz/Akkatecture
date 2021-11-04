@@ -419,7 +419,7 @@ Target.create "Default" DoNothing
   ==> "SonarQubeStart"
   ?=> "Build"
   ==> "Test"
-  ==> "MultiNodeTest"
+  //==> "MultiNodeTest"
   ==> "SonarQubeEnd"
   ?=> "Push"
   ==> "Release"
@@ -429,7 +429,7 @@ Target.create "Default" DoNothing
   ==> "Restore"
   ==> "Build"
   ==> "Test"
-  ==> "MultiNodeTest"
+  //==> "MultiNodeTest"
   ==> "Default"
 
 Target.runOrDefault "Default"
