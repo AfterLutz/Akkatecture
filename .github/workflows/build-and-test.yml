@@ -25,10 +25,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.300
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install FAKE
       run: dotnet tool install fake-cli -g
 
     - name: Run FAKE
-      run: fake run build/build.fsx  --target "Default"
+      run: fake run build/build.fsx  --target ""
