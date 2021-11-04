@@ -26,7 +26,7 @@
   </ItemGroup>  
   
   <ItemGroup>
-    <PackageReference Include="Akka.TestKit" Version="$(AkkaTestKitVersion)" />
+    <PackageReference Include="Akka.TestKit" Version="$(AkkaVersion)" />
     <PackageReference Include="GitHubActionsTestLogger" Version="1.2.0" PrivateAssets="All" />
   </ItemGroup> 
 </Project>
