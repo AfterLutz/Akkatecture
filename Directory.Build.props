@@ -9,7 +9,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <PackageReleaseNotes>Externally Updated</PackageReleaseNotes>
-    <PackageIconUrl>https://akkatecture.net/logos/logo-512.png</PackageIconUrl>
+    <PackageIcon>logo-512.png</PackageIcon>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
@@ -18,8 +18,13 @@
       <NoWarn>NU5104</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\logo-512.png" Pack="true" Visible="false" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
+  </ItemGroup>
+
   <PropertyGroup>
-    <NetCoreAppVersion>netcoreapp2.2</NetCoreAppVersion>
+    <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <AkkaVersion>1.4.27</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>

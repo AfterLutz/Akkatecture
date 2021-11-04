@@ -1,4 +1,15 @@
-#r "paket: groupref build //"
+#r "paket: 
+nuget Fake.Api.GitHub
+nuget Fake.DotNet.Cli
+nuget Fake.DotNet.NuGet
+nuget Fake.IO.FileSystem
+nuget Fake.IO.Zip
+nuget Fake.Core.Target
+nuget Fake.Core.Process
+nuget Fake.BuildServer.TeamFoundation
+nuget Fake.Testing.SonarQube
+nuget FSharp.Json"
+
 #load ".fake/build.fsx/intellisense.fsx"
 
 open System
@@ -254,11 +265,12 @@ Target.create "Test" (fun _ ->
             MSBuildParams = 
                 { defaults.MSBuildParams with
                     Properties = [
-                        "Logger", "GithubActions"
                         "CollectCoverage", "true";
                         "CoverletOutputFormat", "opencover"
                         "CoverletOutput", coverletOutput;
-                        "Exclude", @"[xunit*]*,[Akkatecture.TestHelpers]*,[Akkatecture.Tests*]*,[*TestRunner*]*"] }
+                        "Exclude", @"[xunit*]*,[Akkatecture.TestHelpers]*,[Akkatecture.Tests*]*,[*TestRunner*]*"]
+                    }
+            Logger = Some("GithubActions")
             Configuration = configuration
             NoBuild = true}
 
