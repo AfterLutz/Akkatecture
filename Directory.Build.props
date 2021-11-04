@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NetCoreAppVersion>netcoreapp2.2</NetCoreAppVersion>
+    <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <AkkaVersion>1.4.27</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
