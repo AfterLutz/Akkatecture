@@ -1,5 +1,5 @@
 
-<a href="https://akkatecture.net/"><img src="https://raw.githubusercontent.com/Lutando/Akkatecture/master/logo.svg?sanitize=true" width="100%" height="200"></a>
+<a href="https://akkatecture.net/"><img src="logo.svg?sanitize=true" width="100%" height="200"></a>
 
 
 | nuget | master | dev | code coverage | chat | who are we? |
