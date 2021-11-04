@@ -138,19 +138,8 @@ let coverageResults = sourceDirectory @@ "coverageresults"
 let multiNodeLogs = sourceDirectory @@ "multinodelogs"
 let multiNodeTestScript = sourceDirectory @@ "build" @@ "Run-MultiNodeTests.ps1"
 let feed = lazy(env "FEEDVERSION")
-let internalCredential = lazy ({ Endpoint = sprintf "https://pkgs.dev.azure.com/lutando/Akkatecture/_packaging/%s/nuget/v3/index.json" feed.Value; Username = "lutando"; Password = env "INTERNAL_FEED_PAT"})
-let nugetCredential = lazy ({ Endpoint = "https://api.nuget.org/v3/index.json"; Username = "lutando"; Password = env "NUGET_FEED_PAT"})
 let sonarQubeKey =  lazy (env "SONARCLOUD_TOKEN")
 let githubKey = lazy (env "GITHUB_PAT")
-
-let endpointCredentials : EndpointCredentials = 
-    let credentials = 
-        seq { if hasEnv "NUGET_FEED_PAT" then
-                yield nugetCredential.Value
-              if hasEnv "INTERNAL_FEED_PAT" then
-                 yield internalCredential.Value }
-    
-    {EndpointCredentials = Seq.toList credentials}
 
 // --------------------------------------------------------------------------------------
 // Build Current Working Directory
@@ -187,7 +176,6 @@ Target.create "Clean" (fun _ ->
     Trace.logfn "RuntimeId: %s" runtimeId
     Trace.logfn "Host: %A" host
     Trace.logfn "BuildNumber: %s" buildNumber
-    Trace.logfn "Home: %s" (env "HOME")
 )
 
 Target.create "Archive" (fun _ ->
@@ -346,66 +334,66 @@ Target.create "SonarQubeEnd" (fun _ ->
         SonarQube.finish (Some sonarQubeOptions)
 )
 
-Target.create "Push" (fun _ ->
-    Trace.log " --- Publish Packages --- "
+//Target.create "Push" (fun _ ->
+//    Trace.log " --- Publish Packages --- "
+//
+//    match host with
+//        | AzureDevOps _ -> ()
+//        | Local -> Trace.logfn "NugetFeedUrls: %s" (Json.serialize endpointCredentials)
+//
+//    match feedVersion with
+//        | Some fv -> Trace.logfn "FeedVersion: %A" fv
+//        | None -> ()
+//
+//    if canPush then
+//        match feedVersion with 
+//            | Some NuGet  -> ()
+//            | Some _ -> installCredentialProvider sourceDirectory endpointCredentials
+//            | None -> ()
+//
+//
+//        let source = match feedVersion with
+//                        | Some NuGet -> Some nugetCredential.Value.Endpoint
+//                        | Some _ -> Some internalCredential.Value.Endpoint
+//                        | _ -> None
+//
+//        let apiKey = match feedVersion with
+//                        | Some NuGet -> Some nugetCredential.Value.Password
+//                        | Some _ -> Some internalCredential.Value.Password
+//                        | _ -> None
+//
+//        let packagesGlob = sprintf "%s/*.nupkg" artefactsDirectory
+//
+//        let nugetPushParams (defaults:NuGet.NuGet.NuGetPushParams) =
+//            { defaults with
+//                Source = source
+//                ApiKey = apiKey }
+//                
+//        let nugetPushOptions (defaults:DotNet.NuGetPushOptions) =
+//            { defaults with
+//                PushParams =  nugetPushParams defaults.PushParams }
+//
+//        let packages =
+//            !! packagesGlob
+//
+//        packages |> Seq.iter (DotNet.nugetPush nugetPushOptions)
+//)
 
-    match host with
-        | AzureDevOps _ -> ()
-        | Local -> Trace.logfn "NugetFeedUrls: %s" (Json.serialize endpointCredentials)
-
-    match feedVersion with
-        | Some fv -> Trace.logfn "FeedVersion: %A" fv
-        | None -> ()
-
-    if canPush then
-        match feedVersion with 
-            | Some NuGet  -> ()
-            | Some _ -> installCredentialProvider sourceDirectory endpointCredentials
-            | None -> ()
-
-
-        let source = match feedVersion with
-                        | Some NuGet -> Some nugetCredential.Value.Endpoint
-                        | Some _ -> Some internalCredential.Value.Endpoint
-                        | _ -> None
-
-        let apiKey = match feedVersion with
-                        | Some NuGet -> Some nugetCredential.Value.Password
-                        | Some _ -> Some internalCredential.Value.Password
-                        | _ -> None
-
-        let packagesGlob = sprintf "%s/*.nupkg" artefactsDirectory
-
-        let nugetPushParams (defaults:NuGet.NuGet.NuGetPushParams) =
-            { defaults with
-                Source = source
-                ApiKey = apiKey }
-                
-        let nugetPushOptions (defaults:DotNet.NuGetPushOptions) =
-            { defaults with
-                PushParams =  nugetPushParams defaults.PushParams }
-
-        let packages =
-            !! packagesGlob
-
-        packages |> Seq.iter (DotNet.nugetPush nugetPushOptions)
-)
-
-Target.create "GitHubRelease" (fun _ ->
-    Trace.log " --- GitHubRelease --- "
-    
-    if canGithubRelease then
-        let releaseNotes = 
-            seq {
-                yield "*see the [changelog](https://github.com/Lutando/Akkatecture/blob/dev/CHANGELOG.md) for all other release information*"
-            } 
-        GitHub.createClientWithToken githubKey.Value
-        |> GitHub.draftNewRelease "Lutando" "Akkatecture" buildNumber false releaseNotes
-        |> GitHub.publishDraft
-        |> Async.RunSynchronously
-
-
-)
+//Target.create "GitHubRelease" (fun _ ->
+//    Trace.log " --- GitHubRelease --- "
+//    
+//    if canGithubRelease then
+//        let releaseNotes = 
+//            seq {
+//                yield "*see the [changelog](https://github.com/Lutando/Akkatecture/blob/dev/CHANGELOG.md) for all other release information*"
+//            } 
+//        GitHub.createClientWithToken githubKey.Value
+//        |> GitHub.draftNewRelease "Lutando" "Akkatecture" buildNumber false releaseNotes
+//        |> GitHub.publishDraft
+//        |> Async.RunSynchronously
+//
+//
+//)
 
 // --------------------------------------------------------------------------------------
 // Build order
@@ -421,9 +409,8 @@ Target.create "Default" DoNothing
   ==> "Test"
   //==> "MultiNodeTest"
   ==> "SonarQubeEnd"
-  ?=> "Push"
-  ==> "Release"
-  ==> "GitHubRelease"
+  //?=> "Push"
+  //==> "Release"
 
 "Clean"
   ==> "Restore"
