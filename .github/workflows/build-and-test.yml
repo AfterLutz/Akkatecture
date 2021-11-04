@@ -31,4 +31,5 @@ jobs:
       run: dotnet tool install fake-cli -g
       
     - name: Run FAKE
-      run: fake run build/build.fsx  --target "Default"
+      working-directory: build
+      run: fake run build.fsx  --target "Default"
