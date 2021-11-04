@@ -20,9 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka" Version="$(AkkaVersion)" />
-    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaClusterTestKitVersion)" />
-    <PackageReference Include="Akka.TestKit.Xunit2" Version="$(AkkaTestKitXunitVersion)" />
+    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaVersion)" />
+    <PackageReference Include="Akka.TestKit.Xunit2" Version="$(AkkaVersion)" />
     <PackageReference Include="coverlet.msbuild" Version="$(CoverletMSBuildVersion)" />
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />

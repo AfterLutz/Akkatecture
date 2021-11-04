@@ -23,11 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Akkatecture.TestFixture\Akkatecture.TestFixture.csproj" />
     <ProjectReference Include="..\..\src\Akkatecture\Akkatecture.csproj" />
-  </ItemGroup>
+  </ItemGroup>  
   
   <ItemGroup>
-    <PackageReference Include="Akka.TestKit" Version="$(AkkaTestKitVersion)" />
+    <PackageReference Include="Akka.TestKit" Version="$(AkkaVersion)" />
     <PackageReference Include="GitHubActionsTestLogger" Version="1.2.0" PrivateAssets="All" />
   </ItemGroup> 
-  
 </Project>

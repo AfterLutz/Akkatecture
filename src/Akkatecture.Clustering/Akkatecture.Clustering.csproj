@@ -28,10 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka.Cluster" Version="$(AkkaClusterVersion)" />
-    <PackageReference Include="Akka.Cluster.Sharding" Version="$(AkkaClusterShardingVersion)" />
-    <PackageReference Include="Akka.Cluster.Tools" Version="$(AkkaClusterToolsVersion)" />
-    <PackageReference Include="Akka.Persistence" Version="$(AkkaPersistenceVersion)" />
+    <PackageReference Include="Akka.Cluster.Sharding" Version="$(AkkaVersion)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="$(SourceLinkGithubVersion)" PrivateAssets="All" />
   </ItemGroup>
 
