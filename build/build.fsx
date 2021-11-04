@@ -254,6 +254,7 @@ Target.create "Test" (fun _ ->
             MSBuildParams = 
                 { defaults.MSBuildParams with
                     Properties = [
+                        "Logger", "GithubActions"
                         "CollectCoverage", "true";
                         "CoverletOutputFormat", "opencover"
                         "CoverletOutput", coverletOutput;
