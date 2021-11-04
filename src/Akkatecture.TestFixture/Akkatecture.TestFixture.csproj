@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka.TestKit" Version="$(AkkaTestKitVersion)" />
+    <PackageReference Include="Akka.TestKit" Version="$(AkkaVersion)" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="$(SourceLinkGithubVersion)" PrivateAssets="All" />
   </ItemGroup>
 
