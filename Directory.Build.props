@@ -34,7 +34,7 @@
     <CoverletMSBuildVersion>3.1.0</CoverletMSBuildVersion>
     <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
     <TestSdkVersion>17.0.0</TestSdkVersion>
-    <SourceLinkGithubVersion>1.0.0</SourceLinkGithubVersion>
+    <SourceLinkGithubVersion>1.1.0</SourceLinkGithubVersion>
   </PropertyGroup>
 
   <PropertyGroup>
