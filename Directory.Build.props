@@ -26,7 +26,7 @@
   <PropertyGroup>
     <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
-    <AkkaVersion>1.4.27</AkkaVersion>
+    <AkkaVersion>1.4.29</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
     <XunitVersion>2.4.1</XunitVersion>
     <XunitRunnerVSVersion>2.4.3</XunitRunnerVSVersion>
