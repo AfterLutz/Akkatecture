@@ -22,7 +22,7 @@
       <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
   </ItemGroup>
   <PropertyGroup>
-    <NetCoreAppVersion>netcoreapp2.2</NetCoreAppVersion>
+    <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <AkkaVersion>1.4.10</AkkaVersion>
     <AkkaPersistenceVersion>1.4.10</AkkaPersistenceVersion>
@@ -39,10 +39,10 @@
     <XunitVersion>2.4.1</XunitVersion>
     <XunitRunnerVSVersion>2.4.2</XunitRunnerVSVersion>
     <XunitRunnerUtilityVersion>2.4.1</XunitRunnerUtilityVersion>
-    <CoverletMSBuildVersion>2.9.0</CoverletMSBuildVersion>
+    <CoverletMSBuildVersion>3.1.0</CoverletMSBuildVersion>
     <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
-    <TestSdkVersion>16.6.1</TestSdkVersion>
-    <SourceLinkGithubVersion>1.0.0</SourceLinkGithubVersion>
+    <TestSdkVersion>17.0.0</TestSdkVersion>
+    <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
   </PropertyGroup>
 
   <PropertyGroup>
