@@ -1,0 +1,40 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  DOTNET_VERSION: '3.1' # The .NET SDK version to use
+
+jobs:
+  publish-nuget:
+
+    name: publish-nuget
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Publish package
+      run: ./build.cmd Push nugetpublishurl=https://api.nuget.org/v3/index.json nugetkey="${{secrets.NUGET_API_KEY}}"
+
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: RELEASE_NOTES.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
