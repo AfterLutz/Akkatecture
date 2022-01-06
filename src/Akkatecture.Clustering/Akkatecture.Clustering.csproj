@@ -13,6 +13,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Title>Akkatecture.Clustering</Title>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   
   <PropertyGroup>

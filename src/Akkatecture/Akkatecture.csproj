@@ -14,6 +14,7 @@
     <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup>
