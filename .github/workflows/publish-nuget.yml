@@ -37,7 +37,7 @@ jobs:
       run: |
         dotnet restore
         dotnet build -c Release
-        dotnet pack --no-build /p:Version=${env:VERSION} --output ./bin/nuget
+        dotnet pack -c Release --no-build /p:Version=${env:VERSION} --output ./bin/nuget
 
     - name: Push Packages
       working-directory: ./bin/nuget
