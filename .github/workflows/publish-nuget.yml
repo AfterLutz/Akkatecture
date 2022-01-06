@@ -34,7 +34,9 @@ jobs:
       run: echo "{$env:VERSION}"
 
     - name: Build Packages
-      run: dotnet pack --configuration Release /p:Version=${env:VERSION} --output ./bin/nuget
+      run: |
+        dotnet build -C Release
+        dotnet pack --no-build /p:Version=${env:VERSION} --output ./bin/nuget
 
     - name: Push Packages
       working-directory: ./bin/nuget
