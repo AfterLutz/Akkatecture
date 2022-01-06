@@ -25,7 +25,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Publish package
-      run: ./build.cmd Push nugetpublishurl=https://api.nuget.org/v3/index.json nugetkey="${{secrets.NUGET_API_KEY}}"
+      run: ./build/build.cmd Push nugetpublishurl=https://api.nuget.org/v3/index.json nugetkey="${{secrets.NUGET_API_KEY}}"
 
     - name: release
       uses: actions/create-release@v1
