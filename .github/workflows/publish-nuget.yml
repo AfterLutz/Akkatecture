@@ -24,8 +24,11 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    # Per https://stackoverflow.com/a/65110357/377476
     - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      run: |
+        chcp 65001 #set code page to utf-8
+        echo ("VERSION=" + $env:GITHUB_REF.replace('refs/heads/', '')) >> $env:GITHUB_ENV
 
     - name: Build Packages
       run: dotnet pack --configuration Release /p:Version=${VERSION} --output ./bin/nuget
