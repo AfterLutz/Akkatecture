@@ -35,6 +35,7 @@ jobs:
 
     - name: Build Packages
       run: |
+        dotnet restore
         dotnet build -C Release
         dotnet pack --no-build /p:Version=${env:VERSION} --output ./bin/nuget
 
