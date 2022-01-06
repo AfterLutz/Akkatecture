@@ -24,8 +24,15 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Publish package
-      run: ./build.cmd Push nugetpublishurl=https://api.nuget.org/v3/index.json nugetkey="${{secrets.NUGET_API_KEY}}"
+    - name: Set VERSION variable from tag
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
+    - name: Build Packages
+      run: dotnet pack --configuration Release /p:Version=${VERSION} --output ./bin/nuget
+
+    - name: Push Packages
+      working-directory: ./bin/nuget
+      run: dotnet nuget push "*.nupkg" -k "${{secrets.NUGET_API_KEY}}" -s https://api.nuget.org/v3/index.json --skip-duplicate
 
     - name: release
       uses: actions/create-release@v1
@@ -35,6 +42,6 @@ jobs:
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
         tag_name: ${{ github.ref }}
-        body_path: RELEASE_NOTES.md
+        body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
