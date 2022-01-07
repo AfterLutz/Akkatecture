@@ -1,0 +1,1 @@
+PowerShell.exe -file "./build/build.ps1" %* 

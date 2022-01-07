@@ -3,6 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{2F38E561-BAA0-4A5A-AE2D-7F0C6C823000}</ProjectGuid>
     <RootNamespace>Akkatecture.Clustering</RootNamespace>
+    <AssemblyName>Akkatecture.Clustering.AL</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -12,6 +13,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Title>Akkatecture.Clustering</Title>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   
   <PropertyGroup>

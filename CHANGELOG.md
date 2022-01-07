@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2022-01-04
+- Renamed assemblies to have an "-AL" suffix
+- Republished Nuget packages with the new names
+- Using a new minor version to number, "7", to indicate a clear demarcation from Lutando's work
+- All libraries should be unchanged in functionality from the earlier version
+
 ## [0.6.4] - 2020-03-18
 - Upgraded to Akka.NET v1.4.17
 
