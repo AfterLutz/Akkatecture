@@ -32,7 +32,7 @@
     <XunitRunnerVSVersion>2.4.3</XunitRunnerVSVersion>
     <XunitRunnerUtilityVersion>2.4.1</XunitRunnerUtilityVersion>
     <CoverletMSBuildVersion>3.1.0</CoverletMSBuildVersion>
-    <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
+    <FluentAssertionsVersion>6.3.0</FluentAssertionsVersion>
     <TestSdkVersion>17.0.0</TestSdkVersion>
     <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
   </PropertyGroup>
