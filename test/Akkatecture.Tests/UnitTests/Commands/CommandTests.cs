@@ -10,7 +10,7 @@ namespace Akkatecture.Tests.UnitTests.Commands
     public class CommandTests
     {
         [Fact]
-        public void InstantiatingCommand_WithValidInput_ThrowsException()
+        public void InstantiatingCommand_WithValidInput_ThrowsException_Succeeds()
         {
             var aggregateId = TestAggregateId.New;
             var sourceId = CommandId.New;
