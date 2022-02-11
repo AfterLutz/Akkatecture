@@ -28,7 +28,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install FAKE
-      run: dotnet tool install fake-cli -g
+      run: dotnet tool install -g fake-cli --version 5.21.0
       
     - name: Run FAKE
       working-directory: build
