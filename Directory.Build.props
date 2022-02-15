@@ -24,7 +24,7 @@
     <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
   </ItemGroup>
  <PropertyGroup>
-    <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
+    <NetCoreAppVersion>net6.0</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <AkkaVersion>1.4.31</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
