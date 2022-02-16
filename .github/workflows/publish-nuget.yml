@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  DOTNET_VERSION: '6.0' # The .NET SDK version to use
+  DOTNET_VERSION: '3.1' # The .NET SDK version to use
 
 jobs:
   publish-nuget:
@@ -28,7 +28,7 @@ jobs:
     - name: Set VERSION variable from tag
       run: |
         chcp 65001 #set code page to utf-8
-       echo ("VERSION=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
+        echo ("VERSION=" + $env:GITHUB_REF.replace('refs/tags/', '')) >> $env:GITHUB_ENV
         
     - name: Test
       run: echo "{$env:VERSION}"
