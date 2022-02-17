@@ -56,11 +56,10 @@ namespace Akkatecture.Examples.Api
                 .AddActorReference<ResourceCreationSagaManager>(sagaManager)
                 .AddActorReference<ResourcesStorageHandler>(resourceStorage)
                 .AddActorReference<OperationsStorageHandler>(operationStorage);
-            
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddMvc();
+            services.AddControllers();
+            
             // Add Read Side 
             services
                 .AddTransient<IQueryResources, ResourcesQueryHandler>()
@@ -71,17 +70,13 @@ namespace Akkatecture.Examples.Api
             IApplicationBuilder app,
             ILoggerFactory loggerFactory)
         {
-
             app.Map("/api", api =>
-            {
-                api.UseMvc(routes =>
+            api.UseRouting()
+                .UseEndpoints(endpoints =>
                 {
-                    routes.MapRoute(
-                        name: "default",
-                        template: "{controller}/{action}");
-                });
-            });
-            
+                    endpoints.MapControllerRoute(name: "default",
+                        pattern: "{controller}/{action}");
+                })); 
             
             var logger = loggerFactory.CreateLogger<Startup>();
             logger.LogInformation("Akkatecture.Examples.Api application has initialized.");
