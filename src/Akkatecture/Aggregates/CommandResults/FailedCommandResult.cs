@@ -1,8 +1,12 @@
-﻿// The MIT License (MIT)
+// The MIT License (MIT)
 //
+// Copyright (c) 2015-2021 Rasmus Mikkelsen
+// Copyright (c) 2015-2021 eBay Software Foundation
+//     Modified from original source https://github.com/eventflow/EventFlow
 // Copyright (c) 2018 - 2021 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
-// 
+//     https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2022 AfterLutz contributors
+//     https://github.com/AfterLutz/Akketecture
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -21,21 +25,24 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Akkatecture.Commands;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Akkatecture.TestHelpers.Aggregates.Commands
+namespace Akkatecture.Aggregates.CommandResults;
+
+public class FailedCommandResult : CommandResult
 {
-    public class CreateTestCommand : Command<TestAggregate, TestAggregateId>
+    public IReadOnlyCollection<string> Errors { get; }
+        
+    public FailedCommandResult(string sourceId, IEnumerable<string> errors):base(sourceId, false)
     {
-        public CreateTestCommand(
-            TestAggregateId aggregateId,
-            CommandId sourceId)
-            : base(aggregateId, sourceId)
-        {
-        }
-
-        public CreateTestCommand(TestAggregateId aggregateId) : base(aggregateId)
-        {
-        }
+        Errors = (errors ?? Enumerable.Empty<string>()).ToList();
+    }
+            
+    public override string ToString()
+    {
+        return Errors.Any()
+            ? $"Failed execution for command {CommandId} due to: {string.Join(", ", Errors)}"
+            : $"Failed execution for command {CommandId}";
     }
 }
