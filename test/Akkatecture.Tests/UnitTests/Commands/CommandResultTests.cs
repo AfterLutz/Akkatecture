@@ -25,21 +25,68 @@
 
 
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Akka.Actor;
+using Akka.TestKit.Xunit2;
+using Akkatecture.Aggregates;
 using Akkatecture.Aggregates.CommandResults;
+using Akkatecture.Commands;
 using Akkatecture.TestHelpers.Aggregates;
 using Akkatecture.TestHelpers.Aggregates.Commands;
+using Akkatecture.TestHelpers.Aggregates.Events;
 using FluentAssertions;
 using Xunit;
 
 namespace Akkatecture.Tests.UnitTests.Commands;
 
-public class CommandResultTests
+public class CommandResultTests : TestKit
 {
+    
+    private const string Category = "CommandResults";
+    [Fact]
+    [Category(Category)]
+    public async Task InitialState_AfterAggregateCreation_TestCommandSuccessResultReturned()
+    {
+        var eventProbe = CreateTestProbe("event-probe");
+        var aggregateManager = Sys.ActorOf(Props.Create(() => new TestAggregateManager()), "test-aggregatemanager");
+    
+        var aggregateId = TestAggregateId.New;
+        var commandId = CommandId.New;
+        var command = new CreateTestCommandRequestingCommandResult(aggregateId, commandId);
+        var commandResult = await aggregateManager.Ask<ICommandResult>(command);
+
+        commandResult.IsSuccess.Should().BeTrue();
+        commandResult.CommandId.Should().Be(commandId);
+        (commandResult is SuccessCommandResult).Should().BeTrue();
+    }
+    
+    [Fact]
+    [Category(Category)]
+    public async Task InitialState_AfterAggregateCreation_TestCommandFailResultReturned()
+    {
+        var eventProbe = CreateTestProbe("event-probe");
+        var aggregateManager = Sys.ActorOf(Props.Create(() => new TestAggregateManager()), "test-aggregatemanager");
+    
+        var aggregateId = TestAggregateId.New;
+        var commandId = CommandId.New;
+        var command = new CreateTestCommandRequestingCommandResult(aggregateId, commandId);
+        var commandResult = await aggregateManager.Ask<ICommandResult>(command);
+        
+        // Send the command a second time, triggering a Failure response
+        commandResult = await aggregateManager.Ask<ICommandResult>(command);
+
+        commandResult.IsSuccess.Should().BeFalse();
+        commandResult.CommandId.Should().Be(commandId);
+        (commandResult as FailedCommandResult).Errors.Should().Contain("Aggregate already exists");
+    }
+
      [Fact]
      public void SuccessCommandResults_Should_Show_Success_Using_IIdentity()
      {
          var id = TestAggregateId.New;
-         var createTest = new CreateTestCommand(id); 
+         var createTest = new CreateTestCommand(id, CommandId.New); 
         
          // Pass ICommand as param
          var commandResult = CommandResult.SucceedWith(createTest);
@@ -51,7 +98,7 @@ public class CommandResultTests
     public void SuccessCommandResults_Should_Show_Success_Using_String()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass string as param
         var commandResult = CommandResult.SucceedWith(createTest.SourceId.Value);
@@ -63,7 +110,7 @@ public class CommandResultTests
     public void FailedCommandResults_Should_Show_Failure_Using_String_Array()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass List of errors
         var errorArray = new List<string> { "something bad", "very bad" };
@@ -79,7 +126,7 @@ public class CommandResultTests
     public void FailedCommandResults_Should_Show_Failure_Using_Multiple_Strings()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass string for CommandId
         // Pass multiple string for error messages
@@ -93,7 +140,7 @@ public class CommandResultTests
     public void FailedCommandResults_From_Command_Should_Show_Failure_Using_Multiple_Strings()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass multiple string for error messages
         var commandResult = CommandResult.FailWith(createTest, "something bad", "very bad");
@@ -106,7 +153,7 @@ public class CommandResultTests
     public void FailedCommandResults_Should_Show_Failure_Without_Errors_Supplied()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass IIdentity for sourceId
         // Pass nothing for error messages
@@ -120,7 +167,7 @@ public class CommandResultTests
     public void FailedCommandResults_From_Command_Should_Show_Failure_Without_Errors_Supplied()
     {
         var id = TestAggregateId.New;
-        var createTest = new CreateTestCommand(id); 
+        var createTest = new CreateTestCommand(id, CommandId.New); 
 
         // Pass IIdentity for sourceId
         // Pass nothing for error messages

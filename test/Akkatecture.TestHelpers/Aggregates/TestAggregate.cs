@@ -25,6 +25,7 @@ using System;
 using System.Linq;
 using Akka.Persistence;
 using Akkatecture.Aggregates;
+using Akkatecture.Aggregates.CommandResults;
 using Akkatecture.Aggregates.ExecutionResults;
 using Akkatecture.Aggregates.Snapshot;
 using Akkatecture.Aggregates.Snapshot.Strategies;
@@ -41,6 +42,7 @@ namespace Akkatecture.TestHelpers.Aggregates
     [AggregateName("Test")]
     public sealed class TestAggregate : AggregateRoot<TestAggregate, TestAggregateId, TestAggregateState>, 
         IExecute<CreateTestCommand>,
+        IExecute<CreateTestCommandRequestingCommandResult>,
         IExecute<CreateAndAddTwoTestsCommand>,
         IExecute<AddTestCommand>,
         IExecute<AddFourTestsCommand>,
@@ -80,7 +82,22 @@ namespace Akkatecture.TestHelpers.Aggregates
 
             return true;
         }
-        
+        public bool Execute(CreateTestCommandRequestingCommandResult command)
+        {
+            if (IsNew)
+            {
+                Emit(new TestCreatedEvent(command.AggregateId), new Metadata {{"some-key","some-value"}});
+                Reply(CommandResult.SucceedWith(command));
+            }
+            else
+            {
+                TestErrors++;
+                Throw(new TestedErrorEvent(TestErrors));
+                ReplyFailure(CommandResult.FailWith(command, "Aggregate already exists"));
+            }
+
+            return true;
+        }
 
         public bool Execute(CreateAndAddTwoTestsCommand command)
         {
