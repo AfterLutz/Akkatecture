@@ -62,10 +62,10 @@ namespace Akkatecture.TestHelpers.Aggregates.Sagas.Test
                     domainEvent.AggregateEvent.Test);
                 
                 RequestTimeout(new TestSagaTimeout("First timeout test"),
-                    TimeSpan.FromSeconds(5));
+                    TimeSpan.FromSeconds(3));
 
                 RequestTimeout(new TestSagaTimeout2("Second timeout test; handled asynchronously"),
-                    TimeSpan.FromSeconds(10));
+                    TimeSpan.FromSeconds(12));
                 
                 Emit(new TestSagaStartedEvent(domainEvent.AggregateIdentity,
                     domainEvent.AggregateEvent.RecipientAggregateId, domainEvent.AggregateEvent.Test));
