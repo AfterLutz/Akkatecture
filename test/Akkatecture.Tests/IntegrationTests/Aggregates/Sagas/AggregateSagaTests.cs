@@ -98,7 +98,68 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
                 timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"),
                 TimeSpan.FromSeconds(15));
         }
-        
+
+        [Fact]
+        [Category(Category)]
+        public void SendingTests_FromTwoTestAggregates_AllowsForTwoSagasWithTimeouts()
+        {
+            var eventProbe = CreateTestProbe("event-probe");
+            Sys.EventStream.Subscribe(eventProbe, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>));
+            
+            var aggregateManager = Sys.ActorOf(Props.Create(() => new TestAggregateManager()), "test-aggregatemanager");
+            Sys.ActorOf(Props.Create(() => new TestSagaManager(() => new TestSaga(aggregateManager))), "test-sagaaggregatemanager");
+           
+            // Create first sender aggregate
+            var firstSenderId = new TestAggregateId("testaggregate-11111111-1111-1111-1111-111111111111");
+            aggregateManager.Tell(new CreateTestCommand(firstSenderId, CommandId.New));
+
+            // Create second sender aggregate
+            var secondSenderId = new TestAggregateId("testaggregate-22222222-2222-2222-2222-222222222222");
+            aggregateManager.Tell(new CreateTestCommand(secondSenderId, CommandId.New));
+
+            // Create receiver aggregate
+            var receiverAggregateId = TestAggregateId.New;
+            aggregateManager.Tell(new CreateTestCommand(receiverAggregateId, CommandId.New));
+
+            // Task.Delay(5000).GetAwaiter().GetResult();
+
+            // Create first test entity
+            var firstTestId = TestId.New;
+            var firstTest = new Test(firstTestId);
+            var nextAggregateCommand = new AddTestCommand(firstSenderId, CommandId.New, firstTest);
+            aggregateManager.Tell(nextAggregateCommand);
+            
+            // Send GiveTestCommand to start first saga
+            var sagaStartingCommand = new GiveTestCommand(firstSenderId, CommandId.New,receiverAggregateId,firstTest);
+            aggregateManager.Tell(sagaStartingCommand);
+            
+            // Create second test aggregate
+            var secondTestId = TestId.New;
+            var secondTest = new Test(secondTestId);
+            nextAggregateCommand = new AddTestCommand(secondSenderId, CommandId.New, secondTest);
+            aggregateManager.Tell(nextAggregateCommand);
+            
+            // Send GiveTestCommand to start second saga
+            sagaStartingCommand = new GiveTestCommand(secondSenderId, CommandId.New,receiverAggregateId,secondTest);
+            aggregateManager.Tell(sagaStartingCommand);
+
+            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.Equals("First timeout test"),
+                TimeSpan.FromSeconds(15));
+            
+            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"),
+                TimeSpan.FromSeconds(15));
+            
+            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.Equals("First timeout test"),
+                TimeSpan.FromSeconds(15));
+            
+            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"),
+                TimeSpan.FromSeconds(15));
+        } 
+
         [Fact]
         [Category(Category)]
         public void SendingTest_FromTestAggregate_CompletesSagaAsync()
