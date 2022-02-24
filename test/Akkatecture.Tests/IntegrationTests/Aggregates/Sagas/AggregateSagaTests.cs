@@ -91,7 +91,7 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
                 ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaCompletedEvent>>(new TimeSpan(0,0,20));
                         
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
-                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.Equals("First timeout test"),
+                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("First timeout test"),
                 TimeSpan.FromSeconds(15));
             
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
@@ -144,21 +144,29 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
             aggregateManager.Tell(sagaStartingCommand);
 
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
-                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.Equals("First timeout test"),
+                timeoutMsg => IsTimeoutMessage(timeoutMsg), 
                 TimeSpan.FromSeconds(15));
             
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
-                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"),
+                timeoutMsg => IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
             
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
-                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.Equals("First timeout test"),
+                timeoutMsg =>  IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
             
             eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
-                timeoutMsg => timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"),
+                timeoutMsg =>   IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
-        } 
+        }
+
+        private bool IsTimeoutMessage(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred> timeoutMsg)
+        {
+            var containsCorrectSagaIdInMessage = timeoutMsg.AggregateEvent.TimeoutMessage.Contains(timeoutMsg.AggregateIdentity.Value);
+            return containsCorrectSagaIdInMessage && (timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("First timeout test") || 
+                   timeoutMsg.AggregateEvent.TimeoutMessage.StartsWith("Second timeout test"));
+
+        }
 
         [Fact]
         [Category(Category)]
