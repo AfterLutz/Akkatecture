@@ -53,7 +53,7 @@ namespace Akkatecture.Sagas.AggregateSaga
         private static readonly IReadOnlyDictionary<Type, Action<TSagaState, IAggregateEvent>> ApplyMethodsFromState = typeof(TSagaState).GetAggregateStateEventApplyMethods<TAggregateSaga, TIdentity, TSagaState>();
         private static readonly IReadOnlyDictionary<Type, Action<TSagaState, IAggregateSnapshot>> HydrateMethodsFromState = typeof(TSagaState).GetAggregateSnapshotHydrateMethods<TAggregateSaga, TIdentity, TSagaState>();
         private static readonly IAggregateName SagaName = typeof(TAggregateSaga).GetSagaName();
-        private static readonly List<Type> _sagaTimeoutTypes = new List<Type>();
+        private readonly List<Type> _sagaTimeoutTypes = new List<Type>();
         private Dictionary<Type, IActorRef> SagaTimeoutManagers { get; set; }
         private CircularBuffer<ISourceId> _previousSourceIds = new CircularBuffer<ISourceId>(100);
         
@@ -107,8 +107,11 @@ namespace Akkatecture.Sagas.AggregateSaga
                 InitAsyncReceives();
             }
 
-            InitTimeoutJobManagers();
-            InitAsyncTimeoutJobManagers();
+            if (Settings.UseSagaTimeouts)
+            {
+                InitTimeoutJobManagers();
+                InitAsyncTimeoutJobManagers();
+            }
 
             if (Settings.UseDefaultEventRecover)
             {
@@ -136,7 +139,7 @@ namespace Akkatecture.Sagas.AggregateSaga
                 var sagaTimeoutManagerType = typeof(SagaTimeoutManager<>).MakeGenericType(sagaTimeoutType);
                 var sagaTimeoutManager = Context.ActorOf(Props.Create(() => 
                         (ActorBase) Activator.CreateInstance(sagaTimeoutManagerType)), 
-                    $"{sagaTimeoutType.Name}-timeoutmanager");
+                    $"{sagaTimeoutType.Name.ToLower()}-timeoutmanager");
                 SagaTimeoutManagers.Add(sagaTimeoutType, sagaTimeoutManager);
             }
         }
