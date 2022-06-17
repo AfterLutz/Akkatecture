@@ -1,8 +1,12 @@
-﻿// The MIT License (MIT)
+// The MIT License (MIT)
 //
+// Copyright (c) 2015-2021 Rasmus Mikkelsen
+// Copyright (c) 2015-2021 eBay Software Foundation
+//     Modified from original source https://github.com/eventflow/EventFlow
 // Copyright (c) 2018 - 2021 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
-// 
+//     https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2022 AfterLutz Contributors
+//     https://github.com/AfterLutz/Akketecture
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -21,27 +25,12 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Akka.Configuration;
-using Akkatecture.Configuration;
+using Akkatecture.Aggregates.ExecutionResults;
+using Akkatecture.Commands;
 
-namespace Akkatecture.Sagas.AggregateSaga
+namespace Akkatecture.Aggregates.CommandResults;
+
+public interface ICommandResult: IExecutionResult
 {
-    public class AggregateSagaSettings
-    {
-        private static string _section = "akkatecture.aggregate-saga";
-        public readonly bool AutoReceive;
-        public readonly bool UseDefaultEventRecover;
-        public readonly bool UseDefaultSnapshotRecover;
-        public readonly bool UseSagaTimeouts;
-        public AggregateSagaSettings(Config config)
-        {
-            var aggregateSagaConfig = config.WithFallback(AkkatectureDefaultSettings.DefaultConfig());
-            aggregateSagaConfig = aggregateSagaConfig.GetConfig(_section);
-
-            AutoReceive = aggregateSagaConfig.GetBoolean("auto-receive");
-            UseDefaultEventRecover = aggregateSagaConfig.GetBoolean("use-default-event-recover");
-            UseDefaultSnapshotRecover = aggregateSagaConfig.GetBoolean("use-default-snapshot-recover");
-            UseSagaTimeouts = aggregateSagaConfig.GetBoolean("use-sagatimeouts", true);
-        }
-    }
+    ICommandId CommandId { get; }
 }
