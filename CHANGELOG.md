@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Expand on ExecutionResult class with a CommandResult class; provide correlation identifier
-- Fix bug with SagaTimeouts not working with multiple instances of a saga
+
+## [0.7.1] - 2022-06-24
+- Returned assembly name to original, without "AL"
+- Updated original libraries
 - Assorted dependency upgrades
+- Fix bug with SagaTimeouts not working with multiple instances of a saga
 
 ## [0.7.0] - 2022-01-04
 - Renamed assemblies to have an "-AL" suffix
