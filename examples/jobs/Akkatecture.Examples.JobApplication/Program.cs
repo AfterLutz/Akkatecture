@@ -56,12 +56,12 @@ namespace Akkatecture.Examples.JobApplication
                 .WithNack(Failed.Instance);
 
             var scheduled = await jobManager.Ask<PrintJobResponse>(scheduleMessage);
-
-            var result = scheduled
-                .Match()
-                .With<Success>(x => Console.WriteLine("Job was Scheduled"))
-                .With<Failed>(x => Console.WriteLine("Job was NOT scheduled."))
-                .WasHandled;
+            switch(scheduled)
+            {
+                case Success success: Console.WriteLine("Job was Scheduled"); break;
+                case Failed success: Console.WriteLine("Job was NOT scheduled."); break;
+                default: break;
+            }
 
             Console.ReadLine();
         }
