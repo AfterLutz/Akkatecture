@@ -31,8 +31,8 @@
 	<AkkaMultiNodeTestAdapterVersion>1.5.0</AkkaMultiNodeTestAdapterVersion>
     <XunitVersion>2.4.2</XunitVersion>
     <XunitRunnerVSVersion>2.4.5</XunitRunnerVSVersion>
+    <CoverletMSBuildVersion>3.2.0</CoverletMSBuildVersion>
     <XunitRunnerUtilityVersion>2.4.2</XunitRunnerUtilityVersion>
-    <CoverletMSBuildVersion>3.1.2</CoverletMSBuildVersion>
     <FluentAssertionsVersion>6.7.0</FluentAssertionsVersion>
     <TestSdkVersion>17.2.0</TestSdkVersion>
     <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
