@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaVersion)" />
+    <PackageReference Include="Akka.MultiNode.TestAdapter" Version="$(AkkaMultiNodeTestAdapterVersion)" />
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
     <PackageReference Include="xunit" Version="$(XunitVersion)" />

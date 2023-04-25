@@ -8,7 +8,11 @@ nuget Fake.Core.Target
 nuget Fake.Core.Process
 nuget Fake.BuildServer.TeamFoundation
 nuget Fake.Testing.SonarQube
-nuget FSharp.Json"
+nuget FSharp.Json
+nuget Microsoft.Build 17.3.2
+nuget Microsoft.Build.Framework 17.3.2
+nuget Microsoft.Build.Tasks.Core 17.3.2
+nuget Microsoft.Build.Utilities.Core 17.3.2"
 
 #load ".fake/build.fsx/intellisense.fsx"
 
