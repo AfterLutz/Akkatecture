@@ -6,7 +6,8 @@
 // Modified from original source https://github.com/eventflow/EventFlow
 //
 // Copyright (c) 2018 - 2021 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of

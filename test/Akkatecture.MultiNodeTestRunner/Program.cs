@@ -5,9 +5,11 @@
 // Modified from original source https://github.com/akkadotnet/akka.net
 //
 // Copyright (c) 2018 - 2021 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// 
+// Permission is hereby granted free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
 // the Software without restriction, including without limitation the rights to
 // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -365,4 +367,3 @@ namespace Akkatecture.MultiNodeTestRunner
         }
     }
 }
-
