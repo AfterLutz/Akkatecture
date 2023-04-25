@@ -119,15 +119,11 @@ namespace Akkatecture.Tests.UnitTests.Jobs
             var schedule = new ScheduleRepeatedly<TestJob, TestJobId>(jobId, job, fiveMinutes, when)
                 .WithAck(TestJobAck.Instance)
                 .WithNack(TestJobNack.Instance);
-            
-            
-            
+           
             testJobManager.Tell(schedule, probe);
             probe.ExpectMsg<TestJobAck>();
             scheduler.AdvanceTo(when);
-            
-            
-            
+           
             probe.ExpectMsg<TestJobDone>(x =>
             {
                 x.At.Should().BeCloseTo(when, TimeSpan.FromMilliseconds(200));
