@@ -6,6 +6,8 @@ using Akka.Cluster.Sharding;
 using Akka.Cluster.TestKit;
 using Akka.Cluster.Tests.MultiNode;
 using Akka.Configuration;
+using Akka.Event;
+using Akka.MultiNode.TestAdapter;
 using Akka.Remote.TestKit;
 using Akkatecture.Aggregates;
 using Akkatecture.Clustering.Configuration;

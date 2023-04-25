@@ -1,7 +1,8 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -32,6 +33,7 @@ namespace Akkatecture.Sagas.AggregateSaga
         public readonly bool AutoReceive;
         public readonly bool UseDefaultEventRecover;
         public readonly bool UseDefaultSnapshotRecover;
+        public readonly bool UseSagaTimeouts;
         public AggregateSagaSettings(Config config)
         {
             var aggregateSagaConfig = config.WithFallback(AkkatectureDefaultSettings.DefaultConfig());
@@ -40,6 +42,7 @@ namespace Akkatecture.Sagas.AggregateSaga
             AutoReceive = aggregateSagaConfig.GetBoolean("auto-receive");
             UseDefaultEventRecover = aggregateSagaConfig.GetBoolean("use-default-event-recover");
             UseDefaultSnapshotRecover = aggregateSagaConfig.GetBoolean("use-default-snapshot-recover");
+            UseSagaTimeouts = aggregateSagaConfig.GetBoolean("use-sagatimeouts", true);
         }
     }
 }

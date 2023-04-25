@@ -119,11 +119,13 @@ Akka.net gives us a wealth of good APIs out of the box that can be used to build
 Akkatecture uses the methods of [Keep A Changelog](https://github.com/olivierlacan/keep-a-changelog) to keep track of features or functionality that has been added, changed, deprecated, removed, fixed, or patched for security reasons. The changelog also serves as a source of truth for the project's [release notes](https://github.com/AfterLutz/Akkatecture/releases).
 
 ## Prerelease and Nightly Builds
-Prerelease feeds and nightly feeds (called alpha feeds in this project). Provide the most up to date packages for the project. Roughly speaking the prerelease feed is the most up to date packages that reflect master, and the nightly feed reflects the most up to packages derived from the dev branch. In other words, alpha feed is less stable than the prerelease feed but gets the features and fixes first. The access to the feeds: 
+Prerelease and nightly builds are not currently available. Please check back for updates soon from the maintainers at AfterLutz!
 
-**Prerelease Feed** - [This](https://dev.azure.com/lutando/Akkatecture/_packaging?_a=feed&feed=prerelease) is the Azure Artifacts URL, and [this](https://pkgs.dev.azure.com/lutando/Akkatecture/_packaging/prerelease/nuget/v3/index.json) is the NuGet feed URL.
+~~Prerelease feeds and nightly feeds (called alpha feeds in this project). Provide the most up to date packages for the project. Roughly speaking the prerelease feed is the most up to date packages that reflect master, and the nightly feed reflects the most up to packages derived from the dev branch. In other words, alpha feed is less stable than the prerelease feed but gets the features and fixes first. The access to the feeds:~~ 
 
-**Nightly Feed** - - [This](https://dev.azure.com/lutando/Akkatecture/_packaging?_a=feed&feed=alpha) is the Azure Artifacts URL, and [this](https://pkgs.dev.azure.com/lutando/Akkatecture/_packaging/alpha/nuget/v3/index.json) is the NuGet feed URL.
+~~Prerelease Feed - [This](https://dev.azure.com/lutando/Akkatecture/_packaging?_a=feed&feed=prerelease) is the Azure Artifacts URL, and [this](https://pkgs.dev.azure.com/lutando/Akkatecture/_packaging/prerelease/nuget/v3/index.json) is the NuGet feed URL.~~
+
+~~Nightly Feed - - [This](https://dev.azure.com/lutando/Akkatecture/_packaging?_a=feed&feed=alpha) is the Azure Artifacts URL, and [this](https://pkgs.dev.azure.com/lutando/Akkatecture/_packaging/alpha/nuget/v3/index.json) is the NuGet feed URL.~~
 
 ## Acknowledgements
 

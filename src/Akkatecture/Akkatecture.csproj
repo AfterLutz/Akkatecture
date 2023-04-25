@@ -4,7 +4,6 @@
         <ProjectGuid>{294B5F75-4BF1-4CD1-AA98-1369A4E4ACDE}</ProjectGuid>
         <RootNamespace>Akkatecture</RootNamespace>
         <LangVersion>latest</LangVersion>
-        <AssemblyName>Akkatecture.AL</AssemblyName>
     </PropertyGroup>
 
   <PropertyGroup>
@@ -27,14 +26,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka" Version="$(AkkaVersion)" />
-    <PackageReference Include="Akka.Persistence" Version="$(AkkaPersistenceVersion)" />
-    <PackageReference Include="Akka.Persistence.Query" Version="$(AkkaPersistenceQueryVersion)" />
-    <PackageReference Include="Cronos" Version="0.7.0" />
+    <PackageReference Include="Akka.Persistence.Query" Version="$(AkkaVersion)" />
+    <PackageReference Include="Cronos" Version="0.7.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="$(SourceLinkGithubVersion)" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

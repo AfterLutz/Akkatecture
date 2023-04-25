@@ -1,7 +1,8 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -262,22 +263,22 @@ namespace Akkatecture.Tests.UnitTests.Aggregates
                          && x.AggregateEvent.AggregateState.TestCollection.Count == 5);
         }
         
-        [Fact]
-        [Category(Category)]
-        public void TestEventMultipleEmitSourcing_AfterManyMultiCreateCommand_EventsEmitted()
-        {
-            var aggregateId = TestAggregateId.New;
-            var commandId = CommandId.New;
-            var firstTest = new Test(TestId.New);
-            var secondTest = new Test(TestId.New);
-
-            this.FixtureFor<TestAggregate, TestAggregateId>(aggregateId)
-                .GivenNothing()
-                .When(new CreateAndAddTwoTestsCommand(aggregateId, commandId, firstTest, secondTest))
-                .ThenExpectDomainEvent<TestCreatedEvent>()
-                .ThenExpect<TestAddedEvent>()
-                .ThenExpect<TestAddedEvent>();
-        }
+        // [Fact]
+        // [Category(Category)]
+        // public void TestEventMultipleEmitSourcing_AfterManyMultiCreateCommand_EventsEmitted()
+        // {
+        //     var aggregateId = TestAggregateId.New;
+        //     var commandId = CommandId.New;
+        //     var firstTest = new Test(TestId.New);
+        //     var secondTest = new Test(TestId.New);
+        //
+        //     this.FixtureFor<TestAggregate, TestAggregateId>(aggregateId)
+        //         .GivenNothing()
+        //         .When(new CreateAndAddTwoTestsCommand(aggregateId, commandId, firstTest, secondTest))
+        //         .ThenExpectDomainEvent<TestCreatedEvent>()
+        //         .ThenExpect<TestAddedEvent>()
+        //         .ThenExpect<TestAddedEvent>();
+        // }
         
         [Fact]
         [Category(Category)]

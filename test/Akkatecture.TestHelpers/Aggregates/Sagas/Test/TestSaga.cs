@@ -1,7 +1,8 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -61,17 +62,16 @@ namespace Akkatecture.TestHelpers.Aggregates.Sagas.Test
                     domainEvent.AggregateIdentity,
                     domainEvent.AggregateEvent.Test);
                 
-                RequestTimeout(new TestSagaTimeout("First timeout test"),
-                    TimeSpan.FromSeconds(5));
+                RequestTimeout(new TestSagaTimeout($"First timeout test from {Id}"),
+                    TimeSpan.FromSeconds(3));
 
-                RequestTimeout(new TestSagaTimeout2("Second timeout test; handled asynchronously"),
-                    TimeSpan.FromSeconds(10));
+                RequestTimeout(new TestSagaTimeout2($"Second timeout test; handled asynchronously from {Id}"),
+                    TimeSpan.FromSeconds(12));
                 
                 Emit(new TestSagaStartedEvent(domainEvent.AggregateIdentity,
                     domainEvent.AggregateEvent.RecipientAggregateId, domainEvent.AggregateEvent.Test));
 
                 TestAggregateManager.Tell(command);
-
             }
 
             return true;

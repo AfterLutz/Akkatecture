@@ -1,19 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>$(NetCoreAppVersion)</TargetFramework>
     <NoWarn>xUnit1013</NoWarn>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaClusterTestKitVersion)" />
+    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaVersion)" />
+    <PackageReference Include="Akka.MultiNode.TestAdapter" Version="$(AkkaMultiNodeTestAdapterVersion)" />
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
     <PackageReference Include="xunit" Version="$(XunitVersion)" />
     <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVSVersion)" />
     <PackageReference Include="coverlet.msbuild" Version="$(CoverletMSBuildVersion)" />
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>

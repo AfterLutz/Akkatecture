@@ -1,7 +1,8 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -234,9 +235,12 @@ namespace Akkatecture.Tests.UnitTests.Aggregates
         [Category(Category)]
         public void TestEventMultipleEmitSourcing_AfterManyMultiCreateCommand_EventsEmitted()
         {
-            var eventProbe = CreateTestProbe("event-probe");
-            Sys.EventStream.Subscribe(eventProbe, typeof(IDomainEvent<TestAggregate, TestAggregateId, TestCreatedEvent>));
-            Sys.EventStream.Subscribe(eventProbe, typeof(IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>));
+            var eventProbe1 = CreateTestProbe("event-probe1");
+            Sys.EventStream.Subscribe(eventProbe1, typeof(IDomainEvent<TestAggregate, TestAggregateId, TestCreatedEvent>));
+            
+            var eventProbe2 = CreateTestProbe("event-probe2");
+            Sys.EventStream.Subscribe(eventProbe2, typeof(IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>));
+            
             var aggregateManager = Sys.ActorOf(Props.Create(() => new TestAggregateManager()), "test-aggregatemanager");
 
             var aggregateId = TestAggregateId.New;
@@ -247,9 +251,9 @@ namespace Akkatecture.Tests.UnitTests.Aggregates
             
             aggregateManager.Tell(command);
 
-            eventProbe.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestCreatedEvent>>();
-            eventProbe.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>>();
-            eventProbe.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>>();
+            eventProbe1.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestCreatedEvent>>();
+            eventProbe2.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>>();
+            eventProbe2.ExpectMsg<IDomainEvent<TestAggregate, TestAggregateId, TestAddedEvent>>();
 
         }
         

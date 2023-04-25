@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  DOTNET_VERSION: '3.1' # The .NET SDK version to use
+  DOTNET_VERSION: '6.0' # The .NET SDK version to use
 
 jobs:
   publish-nuget:
@@ -18,13 +18,13 @@ jobs:
         os: [windows-latest]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    # Per https://stackoverflow.com/a/65110357/377476
+# Per https://stackoverflow.com/a/65110357/377476
     - name: Set VERSION variable from tag
       run: |
         chcp 65001 #set code page to utf-8

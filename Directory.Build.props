@@ -5,44 +5,36 @@
     <Copyright>Copyright (c) Lutando Ngqakaza 2018 - 2020</Copyright>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Lutando/Akkatecture</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AfterLutz/Akkatecture</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <PackageReleaseNotes>Externally Updated</PackageReleaseNotes>
-    <PackageIcon>logo-512.png</PackageIcon>  
+   <PackageIcon>logo-512.png</PackageIcon>  
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <IsPackable>false</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
     
   <PropertyGroup>
       <NoWarn>NU5104</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-      <None Include="$(MSBuildThisFileDirectory)\logo-512.png" Pack="true" Visible="false" PackagePath="\" />
-      <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\logo-512.png" Pack="true" Visible="false" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
   </ItemGroup>
-  <PropertyGroup>
-    <NetCoreAppVersion>netcoreapp3.1</NetCoreAppVersion>
+ <PropertyGroup>
+    <NetCoreAppVersion>net6.0</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
-    <AkkaVersion>1.4.10</AkkaVersion>
-    <AkkaPersistenceVersion>1.4.10</AkkaPersistenceVersion>
-    <AkkaPersistenceQueryVersion>1.4.10</AkkaPersistenceQueryVersion>
-    <AkkaRemoteVersion>1.4.10</AkkaRemoteVersion>
-    <AkkaRemoteTestKitVersion>1.4.10</AkkaRemoteTestKitVersion>
-    <AkkaClusterVersion>1.4.10</AkkaClusterVersion>
-    <AkkaClusterShardingVersion>1.4.10</AkkaClusterShardingVersion>
-    <AkkaClusterToolsVersion>1.4.10</AkkaClusterToolsVersion>
-    <AkkaTestKitVersion>1.4.10</AkkaTestKitVersion>
-    <AkkaClusterTestKitVersion>1.4.10</AkkaClusterTestKitVersion>
-    <AkkaTestKitXunitVersion>1.4.10</AkkaTestKitXunitVersion>
-    <AkkatectureMultiNodeSharedVersion>0.5.1</AkkatectureMultiNodeSharedVersion>
-    <XunitVersion>2.4.1</XunitVersion>
-    <XunitRunnerVSVersion>2.4.2</XunitRunnerVSVersion>
-    <XunitRunnerUtilityVersion>2.4.1</XunitRunnerUtilityVersion>
-    <CoverletMSBuildVersion>3.1.0</CoverletMSBuildVersion>
-    <FluentAssertionsVersion>5.10.3</FluentAssertionsVersion>
-    <TestSdkVersion>17.0.0</TestSdkVersion>
+    <AkkaVersion>1.5.2</AkkaVersion>
+    <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
+	<AkkaMultiNodeTestAdapterVersion>1.5.0</AkkaMultiNodeTestAdapterVersion>
+    <XunitVersion>2.4.2</XunitVersion>
+    <XunitRunnerVSVersion>2.4.5</XunitRunnerVSVersion>
+    <CoverletMSBuildVersion>3.2.0</CoverletMSBuildVersion>
+    <XunitRunnerUtilityVersion>2.4.2</XunitRunnerUtilityVersion>
+    <FluentAssertionsVersion>6.10.0</FluentAssertionsVersion>
+    <TestSdkVersion>17.5.0</TestSdkVersion>
     <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
   </PropertyGroup>
 

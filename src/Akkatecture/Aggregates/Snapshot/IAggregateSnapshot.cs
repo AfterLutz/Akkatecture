@@ -1,7 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of

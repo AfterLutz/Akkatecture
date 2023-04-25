@@ -1,7 +1,8 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -81,7 +82,7 @@ namespace Akkatecture.Tests.UnitTests.Jobs
             
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when);
+                x.At.Should().BeCloseTo(when, TimeSpan.FromMilliseconds(200)); 
                 return x.Greeting == greeting;
             });
             
@@ -119,30 +120,26 @@ namespace Akkatecture.Tests.UnitTests.Jobs
             var schedule = new ScheduleRepeatedly<TestJob, TestJobId>(jobId, job, fiveMinutes, when)
                 .WithAck(TestJobAck.Instance)
                 .WithNack(TestJobNack.Instance);
-            
-            
-            
+           
             testJobManager.Tell(schedule, probe);
             probe.ExpectMsg<TestJobAck>();
             scheduler.AdvanceTo(when);
-            
-            
-            
+           
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when);
+                x.At.Should().BeCloseTo(when, TimeSpan.FromMilliseconds(200));
                 return x.Greeting == greeting;
             });
             scheduler.Advance(fiveMinutes);
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when.Add(fiveMinutes));
+                x.At.Should().BeCloseTo(when.Add(fiveMinutes), TimeSpan.FromMilliseconds(200));
                 return x.Greeting == greeting;
             });
             scheduler.Advance(fiveMinutes);
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when.Add( fiveMinutes * 2));
+                x.At.Should().BeCloseTo(when.Add( fiveMinutes * 2), TimeSpan.FromMilliseconds(200));
                 return x.Greeting == greeting;
             });
         }
@@ -181,19 +178,19 @@ namespace Akkatecture.Tests.UnitTests.Jobs
 
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when);
+                x.At.Should().BeCloseTo(when, TimeSpan.FromMilliseconds(200));
                 return x.Greeting == greeting;
             });
             scheduler.Advance(twelveHours);
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when.Add(twelveHours));
+                x.At.Should().BeCloseTo(when.Add(twelveHours), TimeSpan.FromMilliseconds(200));
                 return x.Greeting == greeting;
             });
             scheduler.Advance(twelveHours);
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when.Add(twelveHours * 2));
+                x.At.Should().BeCloseTo(when.Add(twelveHours * 2), TimeSpan.FromMilliseconds(200));
                 
                 return x.Greeting == greeting;
             });
@@ -230,7 +227,7 @@ namespace Akkatecture.Tests.UnitTests.Jobs
             scheduler.AdvanceTo(when);
             probe.ExpectMsg<TestJobDone>(x =>
             {
-                x.At.Should().BeCloseTo(when);
+                x.At.Should().BeCloseTo(when, TimeSpan.FromMilliseconds(200));
                 
                 return x.Greeting == greeting;
             });

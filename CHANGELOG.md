@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2023-04-25
+- change Akka.NET dependency to 1.5.2
+- provide CommandResult class that extends IExecutionResult with a CommandId
+- update documentation
+- correct tests having race conditions
+
+## [0.7.1] - 2022-06-24
+- Returned assembly name to original, without "AL"
+- Updated original libraries
+- Assorted dependency upgrades
+- Fix bug with SagaTimeouts not working with multiple instances of a saga
+
 ## [0.7.0] - 2022-01-04
 - Renamed assemblies to have an "-AL" suffix
 - Republished Nuget packages with the new names
@@ -13,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All libraries should be unchanged in functionality from the earlier version
 
 ## [0.6.4] - 2020-03-18
-- Upgraded to Akka.NET v1.4.10
+- Upgraded to Akka.NET v1.4.17
 
 ## [0.6.3] - 2020-04-10
 

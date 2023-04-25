@@ -1,7 +1,8 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -56,11 +57,10 @@ namespace Akkatecture.Examples.Api
                 .AddActorReference<ResourceCreationSagaManager>(sagaManager)
                 .AddActorReference<ResourcesStorageHandler>(resourceStorage)
                 .AddActorReference<OperationsStorageHandler>(operationStorage);
-            
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddMvc();
+            services.AddControllers();
+            
             // Add Read Side 
             services
                 .AddTransient<IQueryResources, ResourcesQueryHandler>()
@@ -71,17 +71,13 @@ namespace Akkatecture.Examples.Api
             IApplicationBuilder app,
             ILoggerFactory loggerFactory)
         {
-
             app.Map("/api", api =>
-            {
-                api.UseMvc(routes =>
+            api.UseRouting()
+                .UseEndpoints(endpoints =>
                 {
-                    routes.MapRoute(
-                        name: "default",
-                        template: "{controller}/{action}");
-                });
-            });
-            
+                    endpoints.MapControllerRoute(name: "default",
+                        pattern: "{controller}/{action}");
+                })); 
             
             var logger = loggerFactory.CreateLogger<Startup>();
             logger.LogInformation("Akkatecture.Examples.Api application has initialized.");

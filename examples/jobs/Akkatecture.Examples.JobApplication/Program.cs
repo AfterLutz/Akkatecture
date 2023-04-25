@@ -1,7 +1,8 @@
 ﻿// The MIT License (MIT)
 //
-// Copyright (c) 2018 - 2020 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
+// Copyright (c) 2018 - 2021 Lutando Ngqakaza
+// Copyright (c) 2022-2023 AfterLutz Contributors  
+//    https://github.com/AfterLutz/Akketecture
 // 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -56,12 +57,12 @@ namespace Akkatecture.Examples.JobApplication
                 .WithNack(Failed.Instance);
 
             var scheduled = await jobManager.Ask<PrintJobResponse>(scheduleMessage);
-
-            var result = scheduled
-                .Match()
-                .With<Success>(x => Console.WriteLine("Job was Scheduled"))
-                .With<Failed>(x => Console.WriteLine("Job was NOT scheduled."))
-                .WasHandled;
+            switch(scheduled)
+            {
+                case Success success: Console.WriteLine("Job was Scheduled"); break;
+                case Failed success: Console.WriteLine("Job was NOT scheduled."); break;
+                default: break;
+            }
 
             Console.ReadLine();
         }

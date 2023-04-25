@@ -11,12 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Akka" Version="$(AkkaVersion)" />
-    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaClusterTestKitVersion)" />
-    <PackageReference Include="Akka.Remote" Version="$(AkkaRemoteVersion)" />
-    <PackageReference Include="Akka.Remote.TestKit" Version="$(AkkaRemoteTestKitVersion)" />
-    <PackageReference Include="Akka.TestKit" Version="$(AkkaTestKitVersion)" />
-    <PackageReference Include="Akka.TestKit.Xunit2" Version="$(AkkaTestKitXunitVersion)" />
+    <PackageReference Include="Akka.Cluster.TestKit" Version="$(AkkaVersion)" />
     <PackageReference Include="xunit" Version="$(XunitVersion)" />
     <PackageReference Include="xunit.runner.utility" Version="$(XunitRunnerUtilityVersion)" />
     <PackageReference Include="coverlet.msbuild" Version="$(CoverletMSBuildVersion)" />
