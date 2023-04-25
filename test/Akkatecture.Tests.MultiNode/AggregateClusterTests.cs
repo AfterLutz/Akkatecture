@@ -6,12 +6,16 @@ using Akka.Cluster.Sharding;
 using Akka.Cluster.TestKit;
 using Akka.Cluster.Tests.MultiNode;
 using Akka.Configuration;
+using Akka.Event;
+using Akka.MultiNode.TestAdapter;
 using Akka.Remote.TestKit;
 using Akkatecture.Clustering.Configuration;
 using Akkatecture.Clustering.Core;
 using Akkatecture.Commands;
 using Akkatecture.TestHelpers.Aggregates;
 using Akkatecture.TestHelpers.Aggregates.Commands;
+using Xunit;
+[assembly: TestFramework("Akka.MultiNode.TestAdapter.MultiNodeTestFramework", "Akka.MultiNode.TestAdapter")]
 
 namespace Akkatecture.Tests.MultiNode
 {
