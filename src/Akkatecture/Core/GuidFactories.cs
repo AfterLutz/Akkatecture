@@ -2,22 +2,22 @@
 //
 // Copyright (c) 2015-2021 Rasmus Mikkelsen
 // Copyright (c) 2015-2021 eBay Software Foundation
-// Modified from original source https://github.com/eventflow/EventFlow
-//
+//     Modified from original source https://github.com/eventflow/EventFlow
 // Copyright (c) 2018 - 2021 Lutando Ngqakaza
-// https://github.com/Lutando/Akkatecture 
-// 
-// 
+//     https://github.com/Lutando/Akkatecture
+// Copyright (c) 2022 AfterLutz Contributors
+//     https://github.com/AfterLutz/Akketecture
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
 // the Software without restriction, including without limitation the rights to
 // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
 // the Software, and to permit persons to whom the Software is furnished to do so,
 // subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 // FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -26,6 +26,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -75,17 +76,17 @@ namespace Akkatecture.Core
             // https://github.com/LogosBible/Logos.Utility/blob/master/src/Logos.Utility/GuidUtility.cs
             //
             // Copyright 2007-2021 Logos Bible Software
-            // 
+            //
             // Permission is hereby granted, free of charge, to any person obtaining a copy of
             // this software and associated documentation files(the "Software"), to deal in
             // the Software without restriction, including without limitation the rights to
             // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
             // of the Software, and to permit persons to whom the Software is furnished to do
             // so, subject to the following conditions:
-            // 
+            //
             // The above copyright notice and this permission notice shall be included in all
             // copies or substantial portions of the Software.
-            // 
+            //
             // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
             // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
             // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
@@ -96,7 +97,8 @@ namespace Akkatecture.Core
 
             public static Guid Create(Guid namespaceId, string name)
             {
-                if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+                if (string.IsNullOrEmpty(name))
+                    throw new ArgumentNullException(nameof(name));
 
                 // Convert the name to a sequence of octets (as defined by the standard or conventions of its namespace) (step 3)
                 // ASSUME: UTF-8 encoding is always appropriate
@@ -110,14 +112,17 @@ namespace Akkatecture.Core
                 // Always use version 5 (version 3 is MD5, version 5 is SHA1)
                 const int version = 5;
 
-                if (namespaceId == default(Guid)) throw new ArgumentNullException(nameof(namespaceId));
-                if (nameBytes.Length == 0) throw new ArgumentNullException(nameof(nameBytes));
+                if (namespaceId == default)
+                    throw new ArgumentNullException(nameof(namespaceId));
+
+                if (nameBytes.Length == 0)
+                    throw new ArgumentNullException(nameof(nameBytes));
 
                 // Convert the namespace UUID to network order (step 3)
                 var namespaceBytes = namespaceId.ToByteArray();
                 SwapByteOrder(namespaceBytes);
 
-                // Comput the hash of the name space ID concatenated with the name (step 4)
+                // Compute the hash of the name space ID concatenated with the name (step 4)
                 byte[] hash;
                 using (var algorithm = SHA1.Create())
                 {
@@ -146,7 +151,8 @@ namespace Akkatecture.Core
                 return new Guid(newGuid);
             }
 
-            internal static void SwapByteOrder(byte[] guid)
+            // Converts a GUID (expressed as a byte array) to/from network order (MSB-first).
+            private static void SwapByteOrder(IList<byte> guid)
             {
                 SwapBytes(guid, 0, 3);
                 SwapBytes(guid, 1, 2);
@@ -154,12 +160,8 @@ namespace Akkatecture.Core
                 SwapBytes(guid, 6, 7);
             }
 
-            internal static void SwapBytes(byte[] guid, int left, int right)
-            {
-                var temp = guid[left];
-                guid[left] = guid[right];
-                guid[right] = temp;
-            }
+            private static void SwapBytes(IList<byte> guid, int left, int right)
+                => (guid[left], guid[right]) = (guid[right], guid[left]);
         }
     }
 }
