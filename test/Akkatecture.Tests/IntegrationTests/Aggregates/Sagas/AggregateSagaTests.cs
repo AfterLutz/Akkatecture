@@ -103,8 +103,18 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
         [Category(Category)]
         public void SendingTests_FromTwoTestAggregates_AllowsForTwoSagasWithTimeouts()
         {
-            var eventProbe = CreateTestProbe("event-probe");
-            Sys.EventStream.Subscribe(eventProbe, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>));
+            var eventProbe1 = CreateTestProbe("event-probe1");
+            Sys.EventStream.Subscribe(eventProbe1, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>));
+            
+            var eventProbe2 = CreateTestProbe("event-probe2");
+            Sys.EventStream.Subscribe(eventProbe2, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>)); 
+            
+            var eventProbe3 = CreateTestProbe("event-probe3");
+            Sys.EventStream.Subscribe(eventProbe3, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>));
+            
+            var eventProbe4 = CreateTestProbe("event-probe4");
+            Sys.EventStream.Subscribe(eventProbe4, typeof(DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>));
+            
             
             var aggregateManager = Sys.ActorOf(Props.Create(() => new TestAggregateManager()), "test-aggregatemanager");
             Sys.ActorOf(Props.Create(() => new TestSagaManager(() => new TestSaga(aggregateManager))), "test-sagaaggregatemanager");
@@ -120,8 +130,6 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
             // Create receiver aggregate
             var receiverAggregateId = TestAggregateId.New;
             aggregateManager.Tell(new CreateTestCommand(receiverAggregateId, CommandId.New));
-
-            // Task.Delay(5000).GetAwaiter().GetResult();
 
             // Create first test entity
             var firstTestId = TestId.New;
@@ -143,19 +151,19 @@ namespace Akkatecture.Tests.IntegrationTests.Aggregates.Sagas
             sagaStartingCommand = new GiveTestCommand(secondSenderId, CommandId.New,receiverAggregateId,secondTest);
             aggregateManager.Tell(sagaStartingCommand);
 
-            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+            eventProbe1.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
                 timeoutMsg => IsTimeoutMessage(timeoutMsg), 
                 TimeSpan.FromSeconds(15));
             
-            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+            eventProbe2.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
                 timeoutMsg => IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
             
-            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+            eventProbe3.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
                 timeoutMsg =>  IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
             
-            eventProbe.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
+            eventProbe4.ExpectMsg<DomainEvent<TestSaga, TestSagaId, TestSagaTimeoutOccurred>>(
                 timeoutMsg =>   IsTimeoutMessage(timeoutMsg),
                 TimeSpan.FromSeconds(15));
         }
