@@ -26,7 +26,7 @@
  <PropertyGroup>
     <NetCoreAppVersion>net6.0</NetCoreAppVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
-    <AkkaVersion>1.5.2</AkkaVersion>
+    <AkkaVersion>1.5.8</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
 	<AkkaMultiNodeTestAdapterVersion>1.5.0</AkkaMultiNodeTestAdapterVersion>
     <XunitVersion>2.4.2</XunitVersion>
@@ -34,7 +34,7 @@
     <CoverletMSBuildVersion>3.2.0</CoverletMSBuildVersion>
     <XunitRunnerUtilityVersion>2.4.2</XunitRunnerUtilityVersion>
     <FluentAssertionsVersion>6.11.0</FluentAssertionsVersion>
-    <TestSdkVersion>17.5.0</TestSdkVersion>
+    <TestSdkVersion>17.6.2</TestSdkVersion>
     <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
   </PropertyGroup>
 
