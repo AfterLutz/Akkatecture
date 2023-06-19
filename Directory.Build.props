@@ -28,7 +28,7 @@
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <AkkaVersion>1.5.8</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
-	<AkkaMultiNodeTestAdapterVersion>1.5.0</AkkaMultiNodeTestAdapterVersion>
+	<AkkaMultiNodeTestAdapterVersion>1.5.6</AkkaMultiNodeTestAdapterVersion>
     <XunitVersion>2.4.2</XunitVersion>
     <XunitRunnerVSVersion>2.4.5</XunitRunnerVSVersion>
     <CoverletMSBuildVersion>3.2.0</CoverletMSBuildVersion>
