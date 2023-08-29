@@ -34,7 +34,7 @@
     <CoverletMSBuildVersion>6.0.0</CoverletMSBuildVersion>
     <XunitRunnerUtilityVersion>2.4.2</XunitRunnerUtilityVersion>
     <FluentAssertionsVersion>6.11.0</FluentAssertionsVersion>
-    <TestSdkVersion>17.6.2</TestSdkVersion>
+    <TestSdkVersion>17.7.2</TestSdkVersion>
     <SourceLinkGithubVersion>1.1.1</SourceLinkGithubVersion>
   </PropertyGroup>
 
