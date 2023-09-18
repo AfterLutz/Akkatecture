@@ -29,7 +29,7 @@
     <AkkaVersion>1.5.8</AkkaVersion>
     <AkkatectureMultiNodeSharedVersion>0.5.2</AkkatectureMultiNodeSharedVersion>
 	<AkkaMultiNodeTestAdapterVersion>1.5.8</AkkaMultiNodeTestAdapterVersion>
-    <XunitVersion>2.4.2</XunitVersion>
+    <XunitVersion>2.5.1</XunitVersion>
     <XunitRunnerVSVersion>2.4.5</XunitRunnerVSVersion>
     <CoverletMSBuildVersion>6.0.0</CoverletMSBuildVersion>
     <XunitRunnerUtilityVersion>2.4.2</XunitRunnerUtilityVersion>
